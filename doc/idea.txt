@@ -1,0 +1,3 @@
+requirement:
+ in one folder, include subfolder, I want to delete some files with given extension name.
+ 
