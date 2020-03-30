@@ -15,17 +15,13 @@ app = Flask(__name__)
 my_test_time = 1
 global dic_data
 dic_data = {}
-def timedTask():
-    '''
-    第一个参数: 延迟多长时间执行任务(单位: 秒)
-    第二个参数: 要执行的任务, 即函数
-    第三个参数: 调用函数的参数(tuple)
-    '''
-    Timer(3600, test_read_sql_data, ()).start()
+
+
 def test_read_sql_data():
     time_stamp_start = time.time() - 48*60*60
     print(time_stamp_start)
     print(time_stamp_start)
+    #conn = sqlite3.connect(r'test.db')
     conn = sqlite3.connect(r'/usr/local/src/test.db')
     print ("Opened database successfully")
     c = conn.cursor()
@@ -50,8 +46,9 @@ def test_read_sql_data():
 #     print(json_data)
     conn.close()
     #return dic_data
+test_read_sql_data()
 
-@app.route('/start_read')
+@app.route('/start')
 def start_read():
 
     #data_from_sql=test_read_sql_data()
