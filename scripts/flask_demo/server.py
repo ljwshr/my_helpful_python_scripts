@@ -53,13 +53,21 @@ def start_read():
     test_read_sql_data()
     return render_template('hello.html', result = dic_data)
 
+@app.route('/yd_data')
+def return_yundong_data():
+    #test_read_sql_data()
+    #return render_template('hello.html', result = dic_data)
+    
+    print("This is from function show_yundong")
+    return jsonify(json_data)
+
 @app.route('/yd')
 def show_yundong():
     #test_read_sql_data()
     #return render_template('hello.html', result = dic_data)
     
     print("This is from function show_yundong")
-    return jsonify(json_data)
+    return render_template('yun_dong.html')
 
 @app.route('/')
 def do_json():
