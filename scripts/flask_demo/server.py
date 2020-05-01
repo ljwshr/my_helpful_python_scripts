@@ -99,6 +99,7 @@ def transfer_origin_json_data_to_json_data(start_time:int,end_time:int):
         if (int(row['Stamp']) >= start_time) and (int(row['Stamp']) <= end_time):
             result = {}
             result['ID'] =  None # clear the ID
+            #result.pop('ID')
             result['Time'] = row['Time']
             result['nickname'] = row['nickname']
             result['step'] = row['step']
@@ -107,10 +108,11 @@ def transfer_origin_json_data_to_json_data(start_time:int,end_time:int):
             # ID and temp_circle are secure, use internal
             result['ID'] = row['ID']
             temp_circle.append(result)
+            #result['ID'] =  None # clear the ID
             
-    print("This is the first handle")
-    print(json_data)
-    for id in user_data:
+    #print("This is the first handle")
+    #print(json_data)
+    for id in user_data.keys():
         found_flag = False
         for ID_list in temp_circle:
             if ID_list['ID'] == id:
