@@ -37,10 +37,10 @@ def test_read_sql_data():
     global json_data
     for row in results:
         result = {}
-        result['时间'] = str(row[1])
-        result['昵称'] = str(row[3])
-        result['步数'] = str(row[4])
-        result['能量'] = str(row[5])
+        result['Time'] = str(row[1])
+        result['nickname'] = str(row[3])
+        result['step'] = str(row[4])
+        result['cal'] = str(row[5])
 
         json_data.append(result)
     print(json_data)
