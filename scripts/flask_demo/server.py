@@ -15,7 +15,7 @@ app = Flask(__name__)
 my_test_time = 1
 global dic_data
 dic_data = {}
-
+json_data = []
 
 def test_read_sql_data():
     time_stamp_start = time.time() - 48*60*60
@@ -27,42 +27,48 @@ def test_read_sql_data():
     c = conn.cursor()
     results=c.execute('''select * from SPORTS_ACTIVITY where timestamp > ?
     ''',[time_stamp_start])
-    global dic_data
-    dic_data = {}
-    for row in results: 
-        dic_data[str(row[1])]= '\t昵称:'+str(row[3])+'\t步数:'+str(row[4])+'\t能量:'+str(row[5]) 
- 
-    
-    print(dic_data)
-#     json_data = []
+#     global dic_data
+#     dic_data = {}
 #     for row in results:
-#         result = {} 
-#         result['时间'] = str(row[1]) 
-#         result['昵称'] = str(row[3])   
-#         result['步数'] = str(row[4])   
-#         result['能量'] = str(row[5])   
-# 
-#         json_data.append(result)
-#     print(json_data)
+#         dic_data[str(row[1])]= '\t昵称:'+str(row[3])+'\t步数:'+str(row[4])+'\t能量:'+str(row[5])
+#
+#
+#     print(dic_data)
+    global json_data
+    for row in results:
+        result = {}
+        result['时间'] = str(row[1])
+        result['昵称'] = str(row[3])
+        result['步数'] = str(row[4])
+        result['能量'] = str(row[5])
+
+        json_data.append(result)
+    print(json_data)
     conn.close()
     #return dic_data
 test_read_sql_data()
 
 @app.route('/start')
 def start_read():
-
-    #data_from_sql=test_read_sql_data()
-    #dict = {'phy':50,'che':60,'maths':70}
     test_read_sql_data()
     return render_template('hello.html', result = dic_data)
 
+@app.route('/yd')
+def show_yundong():
+    #test_read_sql_data()
+    #return render_template('hello.html', result = dic_data)
+    
+    print("This is from function show_yundong")
+    return jsonify(json_data)
+
 @app.route('/')
 def do_json():
-
-    #data_from_sql=test_read_sql_data()
-    #dict = {'phy':50,'che':60,'maths':70}
-    return render_template('hello.html', result = dic_data)
-
+    #test_read_sql_data()
+    #return render_template('hello.html', result = dic_data)
+    
+    print("This is from function do_json")
+    return jsonify(json_data)
  
 if __name__ == '__main__':
+    app.config['JSON_AS_ASCII'] = False
     app.run(port=5000)
