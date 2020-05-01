@@ -59,13 +59,19 @@
 				
 				var tr;
                 tr='<td>'+data[i].Time+'</td>'+'<td>'+data[i].nickname+'</td>'
-				if (data[i].step == 'None')
+				if (data[i].cal != 'None')
 				{
 					tr += '<td>'+data[i].cal+'卡'+'</td>'
 				}
+				else if (data[i].step != 'None')
+				{
+					tr += '<td >'+data[i].step+'步'+'</td>'
+				}
 				else
 				{
-					tr += '<td>'+data[i].step+'步'+'</td>'
+			
+					tr += '<td style="background-color:#FF0000">'+'未打卡'+'</td>'
+	
 				}
                 $("#tabletest").append('<tr>'+tr+'</tr>')
             }

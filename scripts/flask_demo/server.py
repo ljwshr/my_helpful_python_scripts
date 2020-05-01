@@ -95,8 +95,10 @@ def transfer_origin_json_data_to_json_data(start_time:int,end_time:int):
 
     temp_circle = []
     for row in json_data_origin:
+        
         if (int(row['Stamp']) >= start_time) and (int(row['Stamp']) <= end_time):
             result = {}
+            result['ID'] =  None # clear the ID
             result['Time'] = row['Time']
             result['nickname'] = row['nickname']
             result['step'] = row['step']
@@ -105,7 +107,9 @@ def transfer_origin_json_data_to_json_data(start_time:int,end_time:int):
             # ID and temp_circle are secure, use internal
             result['ID'] = row['ID']
             temp_circle.append(result)
-
+            
+    print("This is the first handle")
+    print(json_data)
     for id in user_data:
         found_flag = False
         for ID_list in temp_circle:
@@ -123,8 +127,6 @@ def transfer_origin_json_data_to_json_data(start_time:int,end_time:int):
             json_data.append(result)
 
 def recursive_get_data_day_by_day():
-    global json_data_origin
-    global json_data
     now_time = int(time.time())
     today_begin_time = now_time - (now_time- time.timezone)%86400
     time_stamp_3days = today_begin_time - 3*24*60*60 # 3天前0时的时间戳
