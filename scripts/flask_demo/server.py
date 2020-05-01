@@ -18,7 +18,7 @@ dic_data = {}
 json_data = []
 
 def test_read_sql_data():
-    time_stamp_start = time.time() - 48*60*60
+    time_stamp_start = time.time() - 4*24*60*60
     print(time_stamp_start)
     print(time_stamp_start)
     #conn = sqlite3.connect(r'test.db')
@@ -27,24 +27,19 @@ def test_read_sql_data():
     c = conn.cursor()
     results=c.execute('''select * from SPORTS_ACTIVITY where timestamp > ?
     ''',[time_stamp_start])
-#     global dic_data
-#     dic_data = {}
-#     for row in results:
-#         dic_data[str(row[1])]= '\t昵称:'+str(row[3])+'\t步数:'+str(row[4])+'\t能量:'+str(row[5])
-#
-#
-#     print(dic_data)
+    conn.close()
+
     global json_data
     for row in results:
         result = {}
-        result['Time'] = str(row[1])
+        result['Time'] = str(row[1][5:])
         result['nickname'] = str(row[3])
         result['step'] = str(row[4])
         result['cal'] = str(row[5])
 
         json_data.append(result)
     print(json_data)
-    conn.close()
+
     #return dic_data
 test_read_sql_data()
 
@@ -58,14 +53,12 @@ def return_yundong_data():
     #test_read_sql_data()
     #return render_template('hello.html', result = dic_data)
     
-    print("This is from function show_yundong")
+    print("This is from function return_yundong_data")
     return jsonify(json_data)
 
 @app.route('/yd')
 def show_yundong():
-    #test_read_sql_data()
-    #return render_template('hello.html', result = dic_data)
-    
+
     print("This is from function show_yundong")
     return render_template('yun_dong.html')
 

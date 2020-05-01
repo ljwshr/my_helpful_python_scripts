@@ -35,10 +35,9 @@
 
 <table class="table table-bordered" id='tabletest'>
     <tr>
-        <th>时间：</th>
-        <th>昵称：</th>
-        <th>步数：</th>
-        <th>能量：</th>
+        <th>Time：</th>
+        <th>Name：</th>
+        <th>Data：</th>
     </tr>
  </table>
  
@@ -57,12 +56,17 @@
 		    //方法中传入的参数data为后台获取的数据
             for(i in data) //data.data指的是数组，数组里是8个对象，i为数组的索引
             {
-                //var tr;
-                //tr='<td>'+data.data[i].Time+'</td>'+'<td>'+data.data[i].nickname+'</td>'+'<td>'//+data.data[i].step+'</td>'+'<td>'+data.data[i].cal+'</td>'
-                //$("#tabletest").append('<tr>'+tr+'</tr>')
 				
 				var tr;
-                tr='<td>'+data[i].Time+'</td>'+'<td>'+data[i].nickname+'</td>'+'<td>'+data[i].step+'</td>'+'<td>'+data[i].cal+'</td>'
+                tr='<td>'+data[i].Time+'</td>'+'<td>'+data[i].nickname+'</td>'
+				if (data[i].step == 'None')
+				{
+					tr += '<td>'+data[i].cal+'卡'+'</td>'
+				}
+				else
+				{
+					tr += '<td>'+data[i].step+'步'+'</td>'
+				}
                 $("#tabletest").append('<tr>'+tr+'</tr>')
             }
 		
