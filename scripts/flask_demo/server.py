@@ -87,7 +87,19 @@ user_data = {
     
 #read_participants()
 print(user_data)
-    
+ 
+def get_data_time():
+    now_hour=int(time.strftime("%H", time.localtime()))
+    now_minute=int(time.strftime("%M", time.localtime()))
+    result = {}
+    result['Time'] = str(now_hour)
+    result['nickname'] = str(now_minute)
+    result['step'] = "5000"
+    result['cal'] = "None"
+    #print(result)
+    json_data.append(result)
+
+get_data_time()
 
 def test_read_sql_data():
     now_time = int(time.time())
@@ -167,7 +179,7 @@ def recursive_get_data_day_by_day():
     time_stamp_3days = today_begin_time - 3*24*60*60 # 3天前0时的时间戳
     time_stamp_2days = today_begin_time - 2*24*60*60 # 2天前0时的时间戳
     time_stamp_1days = today_begin_time - 1*24*60*60 # 3天前0时的时间戳
-    transfer_origin_json_data_to_json_data(time_stamp_3days,time_stamp_2days)
+    #transfer_origin_json_data_to_json_data(time_stamp_3days,time_stamp_2days)
     transfer_origin_json_data_to_json_data(time_stamp_2days,time_stamp_1days)
     transfer_origin_json_data_to_json_data(time_stamp_1days,today_begin_time)
     transfer_origin_json_data_to_json_data(today_begin_time,now_time)
